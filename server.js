@@ -12,7 +12,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors())
 
-
 const db = knex({
     client: 'pg',
     connection: {
@@ -20,7 +19,6 @@ const db = knex({
       ssl:true
     }
 });
-
 
 app.get('/',(req, res) => {res.send('it is working');})
 //dependency injection
@@ -33,5 +31,5 @@ app.post('/imageurl', (req, res) => {image.handleApiCall(req, res, db)})
 
 
 app.listen(process.env.PORT || 3001,()=>{
-    console.log('App is running on port ${process.env.PORT}!');
+    console.log('App is running on port', process.env.PORT);
 })
