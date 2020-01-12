@@ -23,20 +23,8 @@ const db = knex({
     }
 });
 
-const database = {
-    users:[
-        {
-            id:'123',
-            name:'dejan',
-            email:'dejan.obrez@gmail.com',
-            password: '123',
-            entries: 0,
-            joined: new Date()
-        }
-    ]
-}
 
-app.get('/',(req, res) => {res.send(database.users);})
+app.get('/',(req, res) => {res.send('it is working');})
 //dependency injection
 app.post('/signin',(req, res) => {signin.handleSignIn(req, res, db, bcrypt)})
 app.post('/register',  (req, res) => {register.handleSignIn(req, res, db, bcrypt)})
