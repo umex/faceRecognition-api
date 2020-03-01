@@ -15,9 +15,18 @@ app.use(cors())
 const db = knex({
     client: 'pg',
     connection: {
+      host : '127.0.0.1',
+      //host : 'postgresql-deep-25299',
+      user : 'postgres',
+      password : 'isRucu74',
+      database : 'brain'
+    }
+    /*
+    connection: {
       connectionString : process.env.DATABASE_URL,
       ssl:true
     }
+    */
 });
 
 app.get('/',(req, res) => {res.send('it is working');})
@@ -31,5 +40,5 @@ app.post('/imageurl', (req, res) => {image.handleApiCall(req, res, db)})
 
 
 app.listen(process.env.PORT || 3001,()=>{
-    console.log('App is running on port ${process.env.PORT}', process.env.PORT);
+    console.log('App is running on port ${process.env.PORT}', process.env.DATABASE_URL);
 })
