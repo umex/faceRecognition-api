@@ -1,0 +1,44 @@
+version: '3.7'
+
+services: 
+
+    # Postgres
+    postgres:
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: isRucu74
+            POSTGRES_DB: brain
+            POSTGRES_HOST: postgres
+        build: postgres
+        ports: 
+            - "5432:5432"
+        
+
+    # Redis
+    redis:
+        container_name: redis
+        image: redis
+        ports:
+        - "6379:6379"
+
+
+    # Backend API
+    facerecognition-api:
+        container_name: backend
+        #image: node:latest
+        build: ./
+        volumes: 
+            - ./:/usr/src/facerecognition-api
+        command: npm start
+        working_dir: /usr/src/facerecognition-api
+        environment:
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: isRucu74
+            POSTGRES_DB: brain
+            POSTGRES_HOST: postgres
+            REDIS_URI: redis://redis:6379
+        links: 
+            - postgres
+            - redis
+        ports: 
+            - "3001:3001"
